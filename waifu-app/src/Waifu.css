@@ -1,0 +1,20 @@
+.Waifu{
+    align-items: center;
+    width: 200px;
+    margin: 2em;
+    border: 1px solid green;
+    flex-grow: 10;
+}
+
+.Waifu:hover{
+    background: green;
+}
+
+.Pic{
+    width: 200px;
+}
+
+.Attributes{
+    font-size: 12px;
+    color: blue;
+}
