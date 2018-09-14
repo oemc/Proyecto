@@ -5,9 +5,9 @@ class Waifu extends Component {
     constructor(props){
         super(props);
         this.state = {
-            "pic": "https://i.kym-cdn.com/photos/images/original/001/239/422/4a0.png",
-            "name": "Palla",
-            "origin": "Fire Emblem Echoes"
+            "pic": props.character.pic,
+            "name": props.character.name,
+            "origin": props.character.origin   
         }
     }
 
