@@ -10,8 +10,8 @@ class Navigation extends Component{
         return(
             <div>
                 <div className="Navigation">
-                    <NavLink exact to= "/" className="NavButton">Home</NavLink>
-                    <NavLink exact to= "/Create" className="NavButton">Create</NavLink>
+                    <NavLink exact to= "/" className="NavButton" activeStyle={{background: 'black'}}>Home</NavLink>
+                    <NavLink exact to= "/Create" className="NavButton" activeStyle={{background: 'black'}}>Create</NavLink>
                 </div>
                 <Switch>
                     <Route exact path="/" component={Home}/>

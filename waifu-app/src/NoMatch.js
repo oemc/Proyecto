@@ -4,7 +4,9 @@ import './NoMatch.css';
 class NoMatch extends Component{
     render(){
         return(
-            <div className={"NoMatch"}>404 - Not found</div>
+            <div className={"NoMatch"}>
+                <label>404 - Not found</label>
+            </div>
         );
     }
 }

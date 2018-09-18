@@ -18,7 +18,7 @@ class Waifu extends Component {
     render(){
         return (
             <div className="Waifu">
-                <img className="Pic" src={this.state.pic} alt='waifu pic'/>
+                <img className="Pic" src={this.state.pic} alt={this.state.name + " pic"}/>
                 <div className="Attributes">
                     <div>Name: {this.state.name}</div>
                     <div>Origin: {this.state.origin}</div>
