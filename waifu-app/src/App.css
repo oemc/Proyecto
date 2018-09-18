@@ -4,14 +4,27 @@
   flex-direction: column;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.Logo{
+  width: 190px;
+  flex-grow: 0;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App-logo {
+  height: 100px;
+  width: 100px;
+}
+
+.Animation-logo {
+  animation: App-logo-move infinite 2s linear;
+  height: 80px;
+  width: 90px;
+  margin-left: -30px;
+}
+
+@keyframes App-logo-move {
+  0% { transform: rotate(-25deg); }
+  50% { transform: rotate(25deg); }
+  100% { transform: rotate(-25deg); }
 }
 
 .App-header {
@@ -19,7 +32,11 @@
   padding: 5px;
   color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.Message{
+  flex-grow: 1;
 }
 
 .App-title {

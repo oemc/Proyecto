@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import './Home.css';
 import Waifu from './Waifu.js';
-import waifuList from './testList.json';
 
 class Home extends Component {
   constructor(props){
@@ -19,16 +18,6 @@ class Home extends Component {
     }
   }
 
-  updateList = () => {
-    let allId = []
-    waifuList.forEach((character) =>{
-      allId.push(character.id);
-      localStorage.setItem(character.id, JSON.stringify(character));   
-    });
-    localStorage.setItem("allId", JSON.stringify(allId));
-    this.setState({"localList": waifuList});
-  }
-
   renderWaifulist(){
     if (this.state.localList === null){
       return null;
@@ -36,8 +25,8 @@ class Home extends Component {
     return(
       this.state.localList.map((character) => {
         return(
-          <NavLink to= {"/Update/" + character.id} className="UpdateButton">
-            <Waifu key={character.id} character={character}/>
+          <NavLink to= {"/Update/" + character.id} key={character.id} className="UpdateButton">
+            <Waifu character={character}/>
           </NavLink>
         );
       })
