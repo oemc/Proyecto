@@ -1,3 +1,15 @@
 .Navigation{
     background: white;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.NavButton{
+    color: white;
+    background: rgb(100, 100, 100);
+    flex-grow: 1;
+}
+
+.NavButton:active{
+    background: rgb(24, 24, 24);
 }

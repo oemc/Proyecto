@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navigation from './Navigation.js';
-import Home from './Home.js';
 import {BrowserRouter} from 'react-router-dom';
 
 class App extends Component {
