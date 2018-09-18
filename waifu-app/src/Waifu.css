@@ -1,12 +1,5 @@
 .Waifu{
     align-items: center;
-    margin: 0.2em;
-    border: 1px solid green;
-    flex-grow: 1;
-}
-
-.Waifu:hover{
-    background: green;
 }
 
 .Pic{

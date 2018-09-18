@@ -1,0 +1,10 @@
+.Update{
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Column{
+    flex-grow: 1;
+}

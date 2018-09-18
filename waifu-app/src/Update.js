@@ -1,6 +1,8 @@
 import React, {Component}from 'react';
 import {Redirect} from 'react-router-dom';
-
+import Waifu from './Waifu.js';
+import Create from './Create';
+import './Update.css'
 const Update = ({match}) => (<UpdatePage id={match.params.id}/>);
 
 class UpdatePage extends Component{
@@ -12,14 +14,23 @@ class UpdatePage extends Component{
     }
 
     render(){
-        let character = localStorage.getItem(this.state.id);
+        let character = JSON.parse(localStorage.getItem(this.state.id));
         if (character === null){
             return(
                 <Redirect to="/NoMatch"/>
             );
-        };
+        }
         return(
-            <div>{"OK, this is " + this.state.id}</div>
+            <div className="Update">
+                <div className="Column">
+                    <h1>Current Data</h1>
+                    <Waifu key={character.id} character={character}/>
+                </div>
+                <div className="Column">
+                    <h1>New Data</h1>
+                    <Create/>
+                </div>
+            </div>
         );
     }
 }

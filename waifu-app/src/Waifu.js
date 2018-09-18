@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './Waifu.css';
-import {NavLink} from 'react-router-dom';
 
 class Waifu extends Component {
     constructor(props){
@@ -27,7 +26,6 @@ class Waifu extends Component {
                     <div>Hair Color: {this.state.hairColor}</div>
                     <div>Alias: {this.state.alias}</div>
                 </div>
-                <NavLink to= {"/Update/" + this.state.id}>Edit</NavLink>
             </div>
         );
     }

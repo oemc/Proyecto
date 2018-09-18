@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {NavLink} from 'react-router-dom';
 import './Home.css';
 import Waifu from './Waifu.js';
 import waifuList from './testList.json';
@@ -35,7 +36,9 @@ class Home extends Component {
     return(
       this.state.localList.map((character) => {
         return(
-          <Waifu key={character.id} character={character}/>
+          <NavLink to= {"/Update/" + character.id} className="UpdateButton">
+            <Waifu key={character.id} character={character}/>
+          </NavLink>
         );
       })
     )  
