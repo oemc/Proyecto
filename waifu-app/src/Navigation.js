@@ -3,7 +3,8 @@ import {Route, NavLink, Switch} from 'react-router-dom';
 import './Navigation.css'
 import Home from './Home.js';
 import Create from './Create.js';
-import NoMatch from './NoMatch.js'
+import Update from './Update.js';
+import NoMatch from './NoMatch.js';
 
 class Navigation extends Component{
     render(){
@@ -16,6 +17,7 @@ class Navigation extends Component{
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/Create" component={Create}/>
+                    <Route path="/Update/:id" component={Update}/>
                     <Route component={NoMatch}/>
                 </Switch>
             </div>
