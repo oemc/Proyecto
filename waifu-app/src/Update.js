@@ -28,7 +28,7 @@ class UpdatePage extends Component{
                 </div>
                 <div className="Column">
                     <h1>New Data</h1>
-                    <Create/>
+                    <Create character={character}/>
                 </div>
             </div>
         );

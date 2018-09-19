@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
+import Delete from './delete.svg';
+import Edit from './edit.svg';
 import './Home.css';
 import Waifu from './Waifu.js';
+
 
 class Home extends Component {
   constructor(props){
@@ -18,6 +21,10 @@ class Home extends Component {
     }
   }
 
+  deletePrompt(){
+    if (window.confirm('Are you sure you wish to delete this item?'));
+  }
+
   renderWaifulist(){
     if (this.state.localList === null){
       return null;
@@ -25,9 +32,13 @@ class Home extends Component {
     return(
       this.state.localList.map((character) => {
         return(
-          <NavLink to= {"/Update/" + character.id} key={character.id} className="UpdateButton">
+          <div className="WaifuTile">
+            <div className="Controls">
+              <NavLink to= {"/Update/" + character.id} key={"U"+character.id}><img className="Icon" src={Edit} alt="edit"/></NavLink>
+              <img className="Icon" src={Delete} alt="delete" onClick={this.deletePrompt}/>
+            </div>
             <Waifu character={character}/>
-          </NavLink>
+          </div>
         );
       })
     )  

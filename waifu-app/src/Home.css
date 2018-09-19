@@ -4,7 +4,7 @@
     flex-wrap: wrap;
   }
 
-.UpdateButton {
+.WaifuTile {
     margin: 0.2em;
     border: 1px solid rgb(78, 206, 211);
     flex-grow: 1;
@@ -13,4 +13,9 @@
   
 .UpdateButton:hover{
   background: rgb(78, 206, 211);
+}
+
+.Controls {
+  display: flex;
+  justify-content: space-around;
 }
