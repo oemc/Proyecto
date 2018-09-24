@@ -9,7 +9,7 @@ class Waifu extends Component {
             "pic": props.character.pic,
             "name": props.character.name,
             "origin": props.character.origin,
-            "ocupation": props.character.ocupation,
+            "ocupation": props.character.occupation,
             "hairColor": props.character.hairColor,
             "alias":props.character.alias
         }

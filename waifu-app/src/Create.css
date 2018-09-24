@@ -4,6 +4,7 @@
     align-self: center;
     justify-content: space-around;
 }
+
 .Parameter{
     margin: 5px;
 }
@@ -27,4 +28,14 @@
 
 .Pic{
     width: 200px;
+}
+
+.SubmitButton{
+    border: 0px;
+    color: white;
+    background: rgb(100, 100, 100);
+    font-family: sans-serif;
+    text-decoration: underline;
+    height: 2em;
+    line-height: 2em;
 }

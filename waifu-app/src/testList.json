@@ -4,7 +4,7 @@
         "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Palla.png",
         "name": "Palla",
         "origin": "Fire Emblem Echoes",
-        "ocupation":"Pegasus Knight",
+        "occupation":"Pegasus Knight",
         "hairColor":"Green",
         "alias":"Eldest Whitewing"
     },
@@ -13,7 +13,7 @@
         "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Catria.png",
         "name": "Catria",
         "origin": "Fire Emblem Echoes",
-        "ocupation":"Pegasus Knight",
+        "occupation":"Pegasus Knight",
         "hairColor":"Blue",
         "alias":"Middle Whitewing"
     },
@@ -22,7 +22,7 @@
         "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Est.png",
         "name": "Est",
         "origin": "Fire Emblem Echoes",
-        "ocupation":"Pegasus Knight",
+        "occupation":"Pegasus Knight",
         "hairColor":"Pink",
         "alias":"Junior Whitewing"
     },

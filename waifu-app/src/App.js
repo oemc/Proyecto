@@ -6,8 +6,12 @@ import Navigation from './Navigation.js';
 import {BrowserRouter} from 'react-router-dom';
 
 class App extends Component {
-  
-  updateList = () => {
+  constructor(props){
+    super(props);
+    this.updateList = this.updateList.bind(this);
+  }
+
+  updateList(){
     let allId = []
     waifuList.forEach((character) =>{
       allId.push(character.id);

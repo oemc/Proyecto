@@ -1,31 +1,34 @@
 import React, {Component} from 'react';
 import './Create.css'
-
-let RineaPic = "https://vignette.wikia.nocookie.net/fireemblem/images/f/f1/Rinea.png/revision/latest/scale-to-width-down/250?cb=20170405141110";
-
 class Create extends Component{
     constructor(props){
         super(props);
-        if(props.character !== null){
-            this.state={"character": props.character};
-        }
+        let preState = {};
+        props.character != null ? preState.character = props.character : preState.character = {};
+        this.state = preState;
+        this.handleChange = this.handleChange.bind(this);
     }
     
+    handleChange(event){
+        let updated = Object.assign({}, this.state.character);
+        updated[event.target.name] = event.target.value;
+        this.setState({"character": updated});
+    }
+
     render(){
-        let imagepath = (this.state.character === undefined ? RineaPic : this.state.character.pic);
         return(
             <div className="CharacterContainer">
                 <div className="ParamContainer">
-                    <div className="Parameter"><label>Picture:</label><input type='file'/></div>
-                    <div className="Parameter"><label>Name:</label><input/></div>
-                    <div className="Parameter"><label>Origin:</label><input/></div>
-                    <div className="Parameter"><label>Occupation:</label><input/></div>
-                    <div className="Parameter"><label>Hair Color:</label><input/></div>
-                    <div className="Parameter"><label>Alias:</label><input/></div>
-                    <button>Submit</button>
+                    <div className="Parameter"><label>Picture:</label><input name="pic" value={this.state.character.pic} onChange={this.handleChange}/></div>
+                    <div className="Parameter"><label>Name:</label><input name="name" value={this.state.character.name} onChange={this.handleChange}/></div>
+                    <div className="Parameter"><label>Origin:</label><input name="origin" value={this.state.character.origin} onChange={this.handleChange}/></div>
+                    <div className="Parameter"><label>Occupation:</label><input name="occupation" value={this.state.character.occupation} onChange={this.handleChange}/></div>
+                    <div className="Parameter"><label>Hair Color:</label><input name="hairColor" value={this.state.character.hairColor} onChange={this.handleChange}/></div>
+                    <div className="Parameter"><label>Alias:</label><input name="alias" value={this.state.character.alias} onChange={this.handleChange}/></div>
+                    <div className="SubmitButton">Submit</div>
                 </div>
                 <div>
-                    <img className="Pic" src={imagepath} alt="character"/>
+                    <img className="Pic" src={this.state.character.pic} alt="character"/>
                 </div>
             </div>
         );
