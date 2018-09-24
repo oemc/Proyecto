@@ -9,6 +9,12 @@ import Waifu from './Waifu.js';
 class Home extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      "localList": this.getList() 
+    }
+  }
+
+  getList(){
     let foundList = [];
     let foundId = JSON.parse(localStorage.getItem("allId"));
     if (foundId !== null){
@@ -16,13 +22,18 @@ class Home extends Component {
         foundList.push(JSON.parse(localStorage.getItem(Id)));
       });
     }
-    this.state = {
-      "localList": foundList 
-    }
+    return(foundList);
   }
 
-  deletePrompt(){
-    if (window.confirm('Are you sure you wish to delete this item?'));
+  deletePrompt(id){
+    if (window.confirm('Are you sure you wish to delete this character?')){
+      let foundId = JSON.parse(localStorage.getItem("allId"));
+      let index = foundId.indexOf(id);
+      foundId.splice(index, 1);
+      localStorage.setItem("allId", JSON.stringify(foundId));
+      localStorage.removeItem(id);
+      this.setState({localList:this.getList()});
+    }
   }
 
   renderWaifulist(){
@@ -32,10 +43,10 @@ class Home extends Component {
     return(
       this.state.localList.map((character) => {
         return(
-          <div className="WaifuTile">
+          <div className="WaifuTile" key={character.id}>
             <div className="Controls">
-              <NavLink to= {"/Update/" + character.id} key={"U"+character.id}><img className="Icon" src={Edit} alt="edit"/></NavLink>
-              <img className="Icon" src={Delete} alt="delete" onClick={this.deletePrompt}/>
+              <NavLink to= {"/Update/" + character.id}><img className="Icon" src={Edit} alt="edit"/></NavLink>
+              <img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character.id)}/>
             </div>
             <Waifu character={character}/>
           </div>
