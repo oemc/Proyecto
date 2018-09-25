@@ -28,6 +28,7 @@
 
 .Pic{
     margin-top: 10px;
+    max-height: 400px;
     width: 200px;
 }
 
@@ -39,4 +40,8 @@
     text-decoration: underline;
     height: 2em;
     line-height: 2em;
+}
+
+.SubmitButton:active{
+    background: black;
 }
