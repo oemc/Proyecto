@@ -25,8 +25,8 @@ class Home extends Component {
     return(foundList);
   }
 
-  deletePrompt(id){
-    if (window.confirm('Are you sure you wish to delete this character?')){
+  deletePrompt(id, name){
+    if (window.confirm('Are you sure you wish to delete ' + name)){
       let foundId = JSON.parse(localStorage.getItem("allId"));
       let index = foundId.indexOf(id);
       foundId.splice(index, 1);
@@ -46,7 +46,7 @@ class Home extends Component {
           <div className="WaifuTile" key={character.id}>
             <div className="Controls">
               <NavLink to= {"/Update/" + character.id}><img className="Icon" src={Edit} alt="edit"/></NavLink>
-              <img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character.id)}/>
+              <img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character.id, character.name)}/>
             </div>
             <Waifu character={character}/>
           </div>

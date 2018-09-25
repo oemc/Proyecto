@@ -20,11 +20,11 @@ class Waifu extends Component {
             <div className="Waifu">
                 <img className="Pic" src={this.state.pic} alt={this.state.name + " pic"}/>
                 <div className="Attributes">
-                    <div>Name: {this.state.name}</div>
-                    <div>Origin: {this.state.origin}</div>
-                    <div>Occupation: {this.state.ocupation}</div>
-                    <div>Hair Color: {this.state.hairColor}</div>
-                    <div>Alias: {this.state.alias}</div>
+                    <div><label>Name: {this.state.name}</label></div>
+                    <div><label>Origin: {this.state.origin}</label></div>
+                    <div><label>Occupation: {this.state.ocupation}</label></div>
+                    <div><label>Hair Color: {this.state.hairColor}</label></div>
+                    <div><label>Alias: {this.state.alias}</label></div>
                 </div>
             </div>
         );
