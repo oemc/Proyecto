@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import './Create.css'
+import FileBase64 from 'react-file-base64';
+
 class Create extends Component{
     constructor(props){
         super(props);
@@ -15,11 +17,17 @@ class Create extends Component{
         this.setState({"character": updated});
     }
 
+    getPic(file){
+        let updated = Object.assign({}, this.state.character);
+        updated.pic = file.base64;
+        this.setState({"character": updated});
+    }
+
     render(){
         return(
             <div className="CharacterContainer">
                 <div className="ParamContainer">
-                    <div className="Parameter"><label>Picture:</label><input name="pic" value={this.state.character.pic} onChange={this.handleChange}/></div>
+                    <div className="Parameter"><label>Picture:</label><FileBase64 multiple={false} onDone={this.getPic.bind(this)}/></div>
                     <div className="Parameter"><label>Name:</label><input name="name" value={this.state.character.name} onChange={this.handleChange}/></div>
                     <div className="Parameter"><label>Origin:</label><input name="origin" value={this.state.character.origin} onChange={this.handleChange}/></div>
                     <div className="Parameter"><label>Occupation:</label><input name="occupation" value={this.state.character.occupation} onChange={this.handleChange}/></div>
