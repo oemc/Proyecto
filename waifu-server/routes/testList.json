@@ -1,0 +1,89 @@
+[
+    {
+        "id": 0,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Palla.png",
+        "name": "Palla",
+        "origin": "Fire Emblem Echoes",
+        "occupation":"Pegasus Knight",
+        "hairColor":"Green",
+        "alias":"Eldest Whitewing"
+    },
+    {
+        "id": 1,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Catria.png",
+        "name": "Catria",
+        "origin": "Fire Emblem Echoes",
+        "occupation":"Pegasus Knight",
+        "hairColor":"Blue",
+        "alias":"Middle Whitewing"
+    },
+    {
+        "id": 2,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Est.png",
+        "name": "Est",
+        "origin": "Fire Emblem Echoes",
+        "occupation":"Pegasus Knight",
+        "hairColor":"Pink",
+        "alias":"Junior Whitewing"
+    },
+    {
+        "id": 3,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Clair.png",
+        "name": "Clair",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 4,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Sonia.png",
+        "name": "Sonia",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 5,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Tatiana.png",
+        "name": "Tatiana",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 6,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Delthea.png",
+        "name": "Delthea",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 7,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Mathilda.png",
+        "name": "Mathilda",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 8,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Celica.png",
+        "name": "Celica",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 9,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Faye.png",
+        "name": "Faye",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 10,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Genny.png",
+        "name": "Genny",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 11,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Mae.png",
+        "name": "Mae",
+        "origin": "Fire Emblem Echoes"
+    },
+    {
+        "id": 12,
+        "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Silque.png",
+        "name": "Silque",
+        "origin": "Fire Emblem Echoes"
+    }
+]
