@@ -1,16 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
-let waifuList = require('./testlist.json');
+var waifuStorage = require('./waifuStorage.js');
+
+let myStorage = new waifuStorage();
 
 /* GET waifu listing. */
 router.get('/', function(req, res, next) {
-    res.status(200).send(JSON.stringify(waifuList));
+    res.status(200);
+    res.send(JSON.stringify(myStorage.readAll()));
 });
 
-/* GET waifu listing. */
+/* GET specific waifu searching. */
 router.get('/:id', function(req, res, next) {
-    let match = waifuList.find(w => w.id == req.params.id);
+    let match = myStorage.read(req.params.id);
     if(match != null){
         res.status(200).send(match);
     }
@@ -21,12 +24,17 @@ router.get('/:id', function(req, res, next) {
 
 /* POST waifu inserting. */
 router.post('/', function(req, res, next) {
-  res.send('you posted a waifu');
+    res.send(`you posted a waifu ${myStorage.create(req.body)}`);
 });
 
 /* PUT waifu updating. */
-router.put('/', function(req, res, next) {
-    res.send(`you updated the waifu: ${JSON.stringify(req.params)}`);
+router.put('/:id', function(req, res, next) {
+    if(myStorage.update(req.params.id, req.body)){
+        res.send(`you updated a waifu ${req.params.id}`);
+    }
+    else{
+        next(createError(404));
+    }
 });
 
 /* DELETE waifu deleting. */
