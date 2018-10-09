@@ -1,2 +1,2 @@
 # Proyecto
-Proyecto frontend utilizando REACT
+Proyecto de aplicacion web utilizando REACT y EXPRESS
