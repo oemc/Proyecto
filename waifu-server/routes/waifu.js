@@ -24,13 +24,13 @@ router.get('/:id', function(req, res, next) {
 
 /* POST waifu inserting. */
 router.post('/', function(req, res, next) {
-    res.send(`you posted a waifu ${myStorage.create(req.body)}`);
+    res.status(201).send(`you posted a waifu ${myStorage.create(req.body)}`);
 });
 
 /* PUT waifu updating. */
 router.put('/:id', function(req, res, next) {
     if(myStorage.update(req.params.id, req.body)){
-        res.send(`you updated a waifu ${req.params.id}`);
+        res.status(204).send();
     }
     else{
         next(createError(404));
@@ -38,8 +38,13 @@ router.put('/:id', function(req, res, next) {
 });
 
 /* DELETE waifu deleting. */
-router.delete('/', function(req, res, next) {
-    res.send('you deleted a waifu... why?');
+router.delete('/:id', function(req, res, next) {
+    if(myStorage.delete(req.params.id)){
+        res.status(204).send();
+    }
+    else{
+        next(createError(404));
+    }
 });
 
 module.exports = router;

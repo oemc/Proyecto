@@ -23,6 +23,14 @@ class waifuStorage{
         }
         return false;
     }
+    delete(i){
+        let match = this.read(i);
+        if(match != null){
+            waifuList.splice(waifuList.indexOf(match), 1);
+            return true;
+        }
+        return false;
+    }
 }
 
 module.exports = waifuStorage;
