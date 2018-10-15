@@ -42,6 +42,6 @@
     line-height: 2em;
 }
 
-.SubmitButton:active{
+.SubmitButton:hover{
     background: black;
 }

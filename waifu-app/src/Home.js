@@ -46,7 +46,7 @@ class Home extends Component {
           <div className="WaifuTile" key={character.id}>
             <div className="Controls">
               <NavLink to= {"/Update/" + character.id}><img className="Icon" src={Edit} alt="edit"/></NavLink>
-              <img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character.id, character.name)}/>
+              <a href="#"><img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character.id, character.name)}/></a>
             </div>
             <Waifu character={character}/>
           </div>

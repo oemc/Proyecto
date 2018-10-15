@@ -51,7 +51,7 @@ class Create extends Component{
                     <div className="Parameter"><label>Occupation:</label><input name="occupation" value={this.state.character.occupation} onChange={this.handleChange}/></div>
                     <div className="Parameter"><label>Hair Color:</label><input name="hairColor" value={this.state.character.hairColor} onChange={this.handleChange}/></div>
                     <div className="Parameter"><label>Alias:</label><input name="alias" value={this.state.character.alias} onChange={this.handleChange}/></div>
-                    <div className="SubmitButton" onClick={this.submit.bind(this)}>Submit</div>
+                    <a href="#"><div className="SubmitButton" onClick={this.submit.bind(this)}>Submit</div></a>
                 </div>
                 <div>
                     <img className="Pic" src={this.state.character.pic} alt="character"/>
