@@ -7,8 +7,13 @@ let myStorage = new waifuStorage();
 
 /* GET waifu listing. */
 router.get('/', function(req, res, next) {
-    res.status(200);
-    res.send(JSON.stringify(myStorage.readAll()));
+    myStorage.readAll((err, docs) =>{
+        if(err){
+            next(createError(500));
+        }
+        res.status(200);
+        res.send(docs);
+    });
 });
 
 /* GET specific waifu searching. */

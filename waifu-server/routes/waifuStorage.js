@@ -1,9 +1,24 @@
 var uuidv4 = require('uuid/v4');
-let waifuList = require('./testlist.json');
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/local');
+
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
+const Character = new Schema({
+    _id: ObjectId,
+    pic: String,
+    name: String,
+    origin: String,
+    occupation: String,
+    hairColor: String,
+    alias: String
+});
+const CharacterModel = mongoose.model('character', Character);
 
 class waifuStorage{
-    readAll(){
-        return waifuList;
+    readAll(callback){
+        CharacterModel.find({}, callback);
     }
     read(i){
         return waifuList.find(w => w.id == i);
