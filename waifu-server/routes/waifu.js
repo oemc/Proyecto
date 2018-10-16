@@ -32,23 +32,29 @@ router.get('/:id', function(req, res, next) {
 
 /* POST waifu inserting. */
 router.post('/', function(req, res, next) {
-    myStorage.create(req.body, (err, doc) => {
+    myStorage.create(req.body, (err, docs) => {
         if(err){
-            console.log(err);
             next(createError(500));
         }
-        res.status(201).send(doc._id);
+        res.status(201).send(docs._id);
     });
 });
 
 /* PUT waifu updating. */
 router.put('/:id', function(req, res, next) {
-    if(myStorage.update(req.params.id, req.body)){
-        res.status(204).send();
-    }
-    else{
-        next(createError(404));
-    }
+    myStorage.update(req.params.id, req.body, (err, docs) => {
+        if(err){
+            next(createError(500));
+        }
+        else if(docs.n == 0){
+            console.log(docs);
+            next(createError(404));
+        }
+        else{
+            console.log(docs);
+            res.status(204).send();
+        }
+    });
 });
 
 /* DELETE waifu deleting. */

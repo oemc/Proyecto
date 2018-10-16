@@ -27,14 +27,10 @@ class waifuStorage{
         const doc = new CharacterModel(waifu);
         doc.save(callback);
     }
-    update(i, waifu){
-        waifu.id = i;
-        let match = this.read(i);
-        if(match != null){
-            waifuList[waifuList.indexOf(match)] = waifu;
-            return true;
-        }
-        return false;
+    update(i, waifu, callback){
+        waifu._id = i;
+        const doc = new CharacterModel(waifu);
+        CharacterModel.update({ _id: i }, doc, callback);
     }
     delete(i){
         let match = this.read(i);
