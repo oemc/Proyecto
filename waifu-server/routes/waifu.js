@@ -59,12 +59,18 @@ router.put('/:id', function(req, res, next) {
 
 /* DELETE waifu deleting. */
 router.delete('/:id', function(req, res, next) {
-    if(myStorage.delete(req.params.id)){
-        res.status(204).send();
-    }
-    else{
-        next(createError(404));
-    }
+    myStorage.delete(req.params.id, (err, docs) => {
+        if(err){
+            next(createError(500));
+        }
+        else if(docs.n == 0){
+            next(createError(404));
+        }
+        else{
+            console.log(docs);
+            res.status(204).send();
+        }
+    });
 });
 
 module.exports = router;

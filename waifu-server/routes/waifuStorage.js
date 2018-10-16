@@ -32,13 +32,8 @@ class waifuStorage{
         const doc = new CharacterModel(waifu);
         CharacterModel.update({ _id: i }, doc, callback);
     }
-    delete(i){
-        let match = this.read(i);
-        if(match != null){
-            waifuList.splice(waifuList.indexOf(match), 1);
-            return true;
-        }
-        return false;
+    delete(i, callback){
+        CharacterModel.deleteOne({ _id: i }, callback);
     }
 }
 
