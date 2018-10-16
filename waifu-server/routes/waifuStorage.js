@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/local');
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 const Character = new Schema({
-    _id: ObjectId,
+    _id: String,
     pic: String,
     name: String,
     origin: String,
@@ -20,14 +19,13 @@ class waifuStorage{
     readAll(callback){
         CharacterModel.find({}, callback);
     }
-    read(i){
-        return waifuList.find(w => w.id == i);
+    read(i, callback){
+        CharacterModel.findById(i, callback);
     }
-    create(waifu){
-        waifu.id = uuidv4();
-        waifuList.push(waifu);
-        console.log(`New waifu registered, ID ${waifu.id}`);
-        return waifu.id;
+    create(waifu, callback){
+        waifu._id = uuidv4();
+        const doc = new CharacterModel(waifu);
+        doc.save(callback);
     }
     update(i, waifu){
         waifu.id = i;

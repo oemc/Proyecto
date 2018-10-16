@@ -11,25 +11,34 @@ router.get('/', function(req, res, next) {
         if(err){
             next(createError(500));
         }
-        res.status(200);
-        res.send(docs);
+        res.status(200).send(docs);
     });
 });
 
 /* GET specific waifu searching. */
 router.get('/:id', function(req, res, next) {
-    let match = myStorage.read(req.params.id);
-    if(match != null){
-        res.status(200).send(match);
-    }
-    else{
-        next(createError(404));
-    }
+    myStorage.read(req.params.id, (err, docs) =>{
+        if(err){
+            next(createError(500));
+        }
+        else if(docs == null){
+            next(createError(404));
+        }
+        else{
+            res.status(200).send(docs);
+        }
+    });
 });
 
 /* POST waifu inserting. */
 router.post('/', function(req, res, next) {
-    res.status(201).send(`you posted a waifu ${myStorage.create(req.body)}`);
+    myStorage.create(req.body, (err, doc) => {
+        if(err){
+            console.log(err);
+            next(createError(500));
+        }
+        res.status(201).send(doc._id);
+    });
 });
 
 /* PUT waifu updating. */
