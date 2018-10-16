@@ -30,19 +30,28 @@
         "id": 3,
         "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Clair.png",
         "name": "Clair",
-        "origin": "Fire Emblem Echoes"
+        "origin": "Fire Emblem Echoes",
+        "occupation":"Pegasus Knight",
+        "hairColor":"Blonde",
+        "alias":"Highborn Flier"
     },
     {
         "id": 4,
         "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Sonia.png",
         "name": "Sonia",
-        "origin": "Fire Emblem Echoes"
+        "origin": "Fire Emblem Echoes",
+        "occupation":"Dark Mage",
+        "hairColor":"Purple",
+        "alias":"Vengeful Mage"
     },
     {
         "id": 5,
         "pic": "https://serenesforest.net/wp-content/gallery/echoes-portraits/Tatiana.png",
         "name": "Tatiana",
-        "origin": "Fire Emblem Echoes"
+        "origin": "Fire Emblem Echoes",
+        "occupation":"Pegasus Knight",
+        "hairColor":"Blue",
+        "alias":"Highborn Flier"
     },
     {
         "id": 6,
