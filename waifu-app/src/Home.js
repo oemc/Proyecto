@@ -16,19 +16,18 @@ class Home extends Component {
   }
 
   getList(){
-    fetch('http://localhost:3001/api/v1/waifu', {method: 'GET', mode: 'cors'})
+    fetch(`http://localhost:3001/api/v1/waifu`, {method: 'GET', mode: 'cors'})
       .then((response) => { return response.json(); } )
       .then((json) => { this.setState({ "localList": json }) });
   }
 
   deletePrompt(id, name){
     if (window.confirm('Are you sure you wish to delete ' + name)){
-      let foundId = JSON.parse(localStorage.getItem("allId"));
-      let index = foundId.indexOf(id);
-      foundId.splice(index, 1);
-      localStorage.setItem("allId", JSON.stringify(foundId));
-      localStorage.removeItem(id);
-      this.setState({localList:this.getList()});
+      fetch(`http://localhost:3001/api/v1/waifu/${id}`, {method: 'DELETE', mode: 'cors'})
+      .then((response) => { 
+        if(response.status == 204){ this.getList(); }
+        else{ window.alert('An error has ocurrred');} 
+      });
     }
   }
 
@@ -42,7 +41,7 @@ class Home extends Component {
           <div className="WaifuTile" key={character._id}>
             <div className="Controls">
               <NavLink to= {"/Update/" + character._id}><img className="Icon" src={Edit} alt="edit"/></NavLink>
-              <img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character._id, character.name)}/>
+              <a href="#"><img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character._id, character.name)}/></a>
             </div>
             <Waifu character={character}/>
           </div>
