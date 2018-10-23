@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './Create.css'
 import FileBase64 from 'react-file-base64';
-import uuidv4 from 'uuid/v4';
 import {Redirect} from 'react-router-dom';
 
 class Create extends Component{
@@ -9,7 +8,14 @@ class Create extends Component{
         super(props);
         this.state = {
             "done": false,
-            "character": props.character != null ? props.character : {}
+            "character": props.character != null ? props.character : {
+                pic: "",
+                name: "",
+                origin: "",
+                occupation: "",
+                hairColor: "",
+                alias: ""
+            }
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -28,14 +34,28 @@ class Create extends Component{
 
     submit(){
         let updated = Object.assign({}, this.state.character);
-        if(updated.id == null){
-            updated.id = uuidv4();
-            let foundId = JSON.parse(localStorage.getItem("allId"));
-            foundId.push(updated.id);
-            localStorage.setItem("allId",JSON.stringify(foundId));
+        if(updated._id == null){
+            fetch(`http://localhost:3001/api/v1/waifu/`, {
+                method: 'POST',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
+                mode: 'cors',
+                body: JSON.stringify(updated)})
+              .then((response) => { 
+                if(response.status === 201){ this.setState({"done": true}); }
+                else{ window.alert('An error has ocurrred');} 
+              });
         }
-        localStorage.setItem(updated.id, JSON.stringify(updated));
-        this.setState({"done": true});
+        else{
+            fetch(`http://localhost:3001/api/v1/waifu/${updated._id}`, {
+                method: 'PUT',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
+                mode: 'cors',
+                body: JSON.stringify(updated)})
+              .then((response) => { 
+                if(response.status === 204){ this.setState({"done": true}); }
+                else{ window.alert('An error has ocurrred');} 
+              });
+        }
     }
 
     render(){

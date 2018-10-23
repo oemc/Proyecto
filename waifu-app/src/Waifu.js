@@ -5,7 +5,7 @@ class Waifu extends Component {
     constructor(props){
         super(props);
         this.state = {
-            "id": props.character.id,
+            "_id": props.character._id,
             "pic": props.character.pic,
             "name": props.character.name,
             "origin": props.character.origin,

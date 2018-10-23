@@ -17,7 +17,7 @@ class Navigation extends Component{
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/Create" component={Create}/>
-                    <Route path="/Update/:id" component={Update}/>
+                    <Route path="/Update/:_id" component={Update}/>
                     <Route component={NoMatch}/>
                 </Switch>
             </div>

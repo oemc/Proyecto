@@ -16,16 +16,22 @@ class Home extends Component {
   }
 
   getList(){
-    fetch(`http://localhost:3001/api/v1/waifu`, {method: 'GET', mode: 'cors'})
+    fetch(`http://localhost:3001/api/v1/waifu/`, {
+      method: 'GET', 
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
+      mode: 'cors'})
       .then((response) => { return response.json(); } )
       .then((json) => { this.setState({ "localList": json }) });
   }
 
   deletePrompt(id, name){
     if (window.confirm('Are you sure you wish to delete ' + name)){
-      fetch(`http://localhost:3001/api/v1/waifu/${id}`, {method: 'DELETE', mode: 'cors'})
+      fetch(`http://localhost:3001/api/v1/waifu/${id}`, {
+        method: 'DELETE', 
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
+        mode: 'cors'})
       .then((response) => { 
-        if(response.status == 204){ this.getList(); }
+        if(response.status === 204){ this.getList(); }
         else{ window.alert('An error has ocurrred');} 
       });
     }
