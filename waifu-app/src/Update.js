@@ -10,6 +10,7 @@ class UpdatePage extends Component{
         super(props);
         this.state = {
             character: {},
+            ready: false,
             redirect: false
         };
         this.getCharacter(props._id);
@@ -24,7 +25,7 @@ class UpdatePage extends Component{
             if(response.status === 404){ this.setState({ "redirect": true }); }
             return response.json(); })
           .then((json) => { 
-            if(!this.state.redirect){ this.setState({ "character": json }); } });
+            if(!this.state.redirect){ this.setState({ character: json, ready: true }); } });
     }
 
     render(){
@@ -32,6 +33,9 @@ class UpdatePage extends Component{
             return(
                 <Redirect to="/NoMatch"/>
             );
+        }
+        else if(!this.state.ready){
+            return(<div></div>);
         }
         return(
             <div className="Update">

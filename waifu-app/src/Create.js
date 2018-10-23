@@ -6,16 +6,18 @@ import {Redirect} from 'react-router-dom';
 class Create extends Component{
     constructor(props){
         super(props);
+        let preState = props.character != null ? props.character : {
+            pic: "",
+            name: "",
+            origin: "",
+            occupation: "",
+            hairColor: "",
+            alias: ""
+        };
+        console.log(props.character);
         this.state = {
             "done": false,
-            "character": props.character != null ? props.character : {
-                pic: "",
-                name: "",
-                origin: "",
-                occupation: "",
-                hairColor: "",
-                alias: ""
-            }
+            "character": preState
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -71,7 +73,7 @@ class Create extends Component{
                     <div className="Parameter"><label>Occupation:</label><input name="occupation" value={this.state.character.occupation} onChange={this.handleChange}/></div>
                     <div className="Parameter"><label>Hair Color:</label><input name="hairColor" value={this.state.character.hairColor} onChange={this.handleChange}/></div>
                     <div className="Parameter"><label>Alias:</label><input name="alias" value={this.state.character.alias} onChange={this.handleChange}/></div>
-                    <div className="SubmitButton" onClick={this.submit.bind(this)}>Submit</div>
+                    <a href="#"><div className="SubmitButton" onClick={this.submit.bind(this)}>Submit</div></a>
                 </div>
                 <div>
                     <img className="Pic" src={this.state.character.pic} alt="character"/>
