@@ -2,30 +2,61 @@ var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
 var waifuStorage = require('./waifuStorage.js');
-
+var redis = require('redis');
+var redisClient = redis.createClient();
 let myStorage = new waifuStorage();
+
+redisClient.on("error", (err) => {
+    console.log("Error: " + err);
+});
+
+
 
 /* GET waifu listing. */
 router.get('/', function(req, res, next) {
-    myStorage.readAll((err, docs) =>{
+    redisClient.get('*', (err, reply) => {
         if(err){
-            next(createError(500));
+            console.log(err);
         }
-        res.status(200).send(docs);
+        if(reply == null){
+            myStorage.readAll((err, docs) =>{
+                if(err){
+                    next(createError(500));
+                }
+                res.status(200).send(docs);
+                redisClient.append("*", JSON.stringify(docs));
+                redisClient.expire("*", 60);
+            });
+        }
+        else{
+            res.status(200).send(reply);
+        }
     });
 });
 
 /* GET specific waifu searching. */
 router.get('/:id', function(req, res, next) {
-    myStorage.read(req.params.id, (err, docs) =>{
+    redisClient.get(req.params.id, (err, reply) => {
         if(err){
-            next(createError(500));
+            console.log(err);
         }
-        else if(docs == null){
-            next(createError(404));
+        if(reply == null){
+            myStorage.read(req.params.id, (err, docs) =>{
+                if(err){
+                    next(createError(500));
+                }
+                else if(docs == null){
+                    next(createError(404));
+                }
+                else{
+                    res.status(200).send(docs);
+                    redisClient.append(req.params.id, JSON.stringify(docs));
+                    redisClient.expire(req.params.id, 300);
+                }
+            });
         }
         else{
-            res.status(200).send(docs);
+            res.status(200).send(reply);
         }
     });
 });
