@@ -23,9 +23,12 @@ class UpdatePage extends Component{
           mode: 'cors'})
           .then((response) => { 
             if(response.status === 404){ this.setState({ "redirect": true }); }
-            return response.json(); })
+            return response.json(); 
+          })
           .then((json) => { 
-            if(!this.state.redirect){ this.setState({ character: json, ready: true }); } });
+            if(!this.state.redirect){ this.setState({ character: json, ready: true }); } 
+          })
+          .catch((err) => { console.log("Error: " + err) });
     }
 
     render(){

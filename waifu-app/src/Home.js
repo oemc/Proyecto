@@ -21,7 +21,8 @@ class Home extends Component {
       headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
       mode: 'cors'})
       .then((response) => { return response.json(); } )
-      .then((json) => { this.setState({ "localList": json }) });
+      .then((json) => { this.setState({ "localList": json }) })
+      .catch((err) => { console.log("Error: " + err) });
   }
 
   deletePrompt(id, name){
@@ -33,7 +34,8 @@ class Home extends Component {
       .then((response) => { 
         if(response.status === 204){ this.getList(); }
         else{ window.alert('An error has ocurrred');} 
-      });
+      })
+      .catch((err) => { console.log("Error: " + err) });
     }
   }
 

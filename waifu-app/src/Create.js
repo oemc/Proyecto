@@ -41,11 +41,13 @@ class Create extends Component{
                 method: 'POST',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
                 mode: 'cors',
-                body: JSON.stringify(updated)})
-              .then((response) => { 
+                body: JSON.stringify(updated)
+            })
+            .then((response) => { 
                 if(response.status === 201){ this.setState({"done": true}); }
                 else{ window.alert('An error has ocurrred');} 
-              });
+            })
+            .catch((err) => { console.log("Error: " + err) });
         }
         else{
             fetch(`http://localhost:3001/api/v1/waifu/${updated._id}`, {
@@ -53,10 +55,11 @@ class Create extends Component{
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
                 mode: 'cors',
                 body: JSON.stringify(updated)})
-              .then((response) => { 
+            .then((response) => { 
                 if(response.status === 204){ this.setState({"done": true}); }
                 else{ window.alert('An error has ocurrred');} 
-              });
+            })
+            .catch((err) => { console.log("Error: " + err) });
         }
     }
 
