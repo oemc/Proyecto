@@ -1,47 +1,38 @@
 var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
-var waifuStorage = require('./waifuStorage.js');
-var redis = require('redis');
-var redisClient = redis.createClient();
-let myStorage = new waifuStorage();
-
-redisClient.on("error", (err) => {
-    console.log("Error: " + err);
-});
-
-
+let storage = require('./storage.js');
+let cache = require('./cache.js');
 
 /* GET waifu listing. */
 router.get('/', function(req, res, next) {
-    redisClient.get('*', (err, reply) => {
+    cache.get('*', (err, reply) => {
         if(err){
             console.log(err);
         }
         if(reply == null){
-            myStorage.readAll((err, docs) =>{
+            storage.readAll((err, docs) =>{
                 if(err){
                     next(createError(500));
                 }
-                res.status(200).send(docs);
-                redisClient.append("*", JSON.stringify(docs));
-                redisClient.expire("*", 60);
+                res.status(200).json(docs);
+                cache.append('*', docs, 60);
             });
         }
         else{
-            res.status(200).send(reply);
+            res.status(200).type('json').send(reply);
         }
     });
 });
 
 /* GET specific waifu searching. */
 router.get('/:id', function(req, res, next) {
-    redisClient.get(req.params.id, (err, reply) => {
+    cache.get(req.params.id, (err, reply) => {
         if(err){
             console.log(err);
         }
         if(reply == null){
-            myStorage.read(req.params.id, (err, docs) =>{
+            storage.read(req.params.id, (err, docs) =>{
                 if(err){
                     next(createError(500));
                 }
@@ -49,31 +40,30 @@ router.get('/:id', function(req, res, next) {
                     next(createError(404));
                 }
                 else{
-                    res.status(200).send(docs);
-                    redisClient.append(req.params.id, JSON.stringify(docs));
-                    redisClient.expire(req.params.id, 300);
+                    res.status(200).json(docs);
+                    cache.append(req.params.id, docs, 120);
                 }
             });
         }
         else{
-            res.status(200).send(reply);
+            res.status(200).type('json').send(reply);
         }
     });
 });
 
 /* POST waifu inserting. */
 router.post('/', function(req, res, next) {
-    myStorage.create(req.body, (err, docs) => {
+    storage.create(req.body, (err, docs) => {
         if(err){
             next(createError(500));
         }
-        res.status(201).send(docs._id);
+        res.status(201).json({ id: docs._id });
     });
 });
 
 /* PUT waifu updating. */
 router.put('/:id', function(req, res, next) {
-    myStorage.update(req.params.id, req.body, (err, docs) => {
+    storage.update(req.params.id, req.body, (err, docs) => {
         if(err){
             next(createError(500));
         }
@@ -90,7 +80,7 @@ router.put('/:id', function(req, res, next) {
 
 /* DELETE waifu deleting. */
 router.delete('/:id', function(req, res, next) {
-    myStorage.delete(req.params.id, (err, docs) => {
+    storage.delete(req.params.id, (err, docs) => {
         if(err){
             next(createError(500));
         }

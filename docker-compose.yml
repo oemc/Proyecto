@@ -1,30 +1,30 @@
 version: '3'
 services:
+
 # Setup node container
-server:
-  build: ./waifu-server
-  expose:
-    - 3001
-  #environment:
-  #  API_HOST: ${API_HOST}
-  #  APP_SERVER_PORT: ${APP_SERVER_PORT}
-  ports:
-    - 3001:3001
-  #volumes:
-  #  - ./server/src:/usr/src/app/
-  command: npm start
+  server:
+    build: ./waifu-server
+    hostname: ${SERVER_ALIAS}
+    expose:
+      - ${SERVER_PORT}
+    environment:
+      API_HOST: ${API_HOST}
+      API_PORT: ${SERVER_PORT}
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    command: npm start
+
 # Setup client container
-client:
-  build: ./waifu-app
-  #environment:
-  #  - REACT_APP_PORT=${REACT_APP_PORT}
-  expose:
-    - 80
-  ports:
-    - 80:8000
-  #volumes:
-  #  - ./client/src:/usr/src/app/src
-  #  - ./client/public:/usr/src/app/public
-  links:
-    - server
-  command: npm start
+  client:
+    build: ./waifu-app
+    hostname: waifu-app
+    environment:
+      - REACT_APP_API_HOST=http://${SERVER_ALIAS}:${SERVER_PORT}/
+      - REACT_APP_PORT=${APP_PORT}
+    expose:
+      - ${APP_PORT}
+    ports:
+      - ${MAP_APP_PORT}:${APP_PORT}
+    links:
+      - server
+    command: [nginx, '-g', 'daemon off;']

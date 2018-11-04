@@ -37,7 +37,7 @@ class Create extends Component{
     submit(){
         let updated = Object.assign({}, this.state.character);
         if(updated._id == null){
-            fetch(`http://localhost:3001/api/v1/waifu/`, {
+            fetch(process.env.REACT_APP_APIHOST + process.env.REACT_APP_APIROUTE, {
                 method: 'POST',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
                 mode: 'cors',
@@ -50,7 +50,7 @@ class Create extends Component{
             .catch((err) => { console.log("Error: " + err) });
         }
         else{
-            fetch(`http://localhost:3001/api/v1/waifu/${updated._id}`, {
+            fetch(process.env.REACT_APP_APIHOST + process.env.REACT_APP_APIROUTE + updated._id, {
                 method: 'PUT',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
                 mode: 'cors',

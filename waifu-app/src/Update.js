@@ -17,7 +17,7 @@ class UpdatePage extends Component{
     }
 
     getCharacter(_id){
-        fetch(`http://localhost:3001/api/v1/waifu/${_id}`, {
+        fetch(process.env.REACT_APP_APIHOST + process.env.REACT_APP_APIROUTE + _id, {
           method: 'GET', 
           headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
           mode: 'cors'})
