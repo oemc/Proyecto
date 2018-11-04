@@ -1,6 +1,22 @@
 version: '3'
 services:
 
+
+# Setup mongodb container
+  mongodb:
+    image: mongo:latest
+    hostname: ${MONGO_ALIAS}
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    command: mongod --port ${MONGO_PORT}
+
+# Setup redis container
+  redis:
+    image: redis:latest
+    hostname: ${REDIS_ALIAS}
+    command: redis-server
+
 # Setup node container
   server:
     build: ./waifu-server
@@ -8,16 +24,20 @@ services:
     expose:
       - ${SERVER_PORT}
     environment:
-      API_HOST: ${API_HOST}
+      DB_HOST: ${MONGO_ALIAS}
       API_PORT: ${SERVER_PORT}
+      REDIS_HOST: ${REDIS_ALIAS}
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
+    links:
+      - mongodb
+      - redis
     command: npm start
 
 # Setup client container
   client:
     build: ./waifu-app
-    hostname: waifu-app
+    hostname: ${APP_ALIAS}
     environment:
       - REACT_APP_API_HOST=http://${SERVER_ALIAS}:${SERVER_PORT}/
       - REACT_APP_PORT=${APP_PORT}

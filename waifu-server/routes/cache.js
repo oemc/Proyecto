@@ -1,7 +1,7 @@
 const redis = require('redis');
 
 function redisConnect(){
-    let client = redis.createClient({
+    let client = redis.createClient(`redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,{
         retry_strategy: ()=>{
             return new Error('The server refused the connection');
         }
