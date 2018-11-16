@@ -17,7 +17,7 @@ class UpdatePage extends Component{
     }
 
     getCharacter(_id){
-        fetch(process.env.REACT_APP_APIHOST + process.env.REACT_APP_APIROUTE + _id, {
+        fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}/${_id}`, {
           method: 'GET', 
           headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
           mode: 'cors'})

@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: client
+spec:
+  selector:
+    matchLabels:
+      app: waifu-app
+      tier: frontend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: waifu-app
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+      - args:
+        - nginx
+        - -g
+        - daemon off;
+        image: us.gcr.io/waifuwebapp/client
+        env:
+        - name: REACT_APP_SERVER_SERVICE_HOST
+          value: "10.47.251.22"
+        - name: REACT_APP_SERVER_SERVICE_PORT
+          value: "3001"
+        - name: REACT_APP_SERVER_ROUTE
+          value: "api/v1/waifu"
+        name: client
+        ports:
+        - containerPort: 80
+      hostname: waifu-app

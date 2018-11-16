@@ -16,7 +16,7 @@ class Home extends Component {
   }
 
   getList(){
-    fetch(process.env.REACT_APP_APIHOST + process.env.REACT_APP_APIROUTE, {
+    fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}`, {
       method: 'GET', 
       headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
       mode: 'cors'})
@@ -27,7 +27,7 @@ class Home extends Component {
 
   deletePrompt(id, name){
     if (window.confirm('Are you sure you wish to delete ' + name)){
-      fetch(process.env.REACT_APP_APIHOST + process.env.REACT_APP_APIROUTE + id, {
+      fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}/${id}`, {
         method: 'DELETE', 
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
         mode: 'cors'})

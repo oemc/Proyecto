@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: react-app-server
+spec:
+  selector:
+    matchLabels:
+      app: waifu-app
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: waifu-app
+        tier: backend
+        track: stable
+    spec:
+      containers:
+      - args:
+        - npm
+        - start
+        image: us.gcr.io/waifuwebapp/server
+        env:
+        - name: MONGODB_SERVICE_HOST
+          value: "10.47.252.214"
+        - name: MONGODB_SERVICE_PORT
+          value: "27017"
+        - name: REDIS_SERVICE_HOST
+          value: "10.47.242.109"
+        - name: REDIS_SERVICE_PORT
+          value: "6379"
+        - name: DB_NAME
+          value: "chardb"
+        - name: API_PORT
+          value: "3001"
+        name: react-app-server
+        ports:
+        - containerPort: 3001
+      hostname: react-app-server

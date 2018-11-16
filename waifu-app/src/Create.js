@@ -37,7 +37,7 @@ class Create extends Component{
     submit(){
         let updated = Object.assign({}, this.state.character);
         if(updated._id == null){
-            fetch(process.env.REACT_APP_APIHOST + process.env.REACT_APP_APIROUTE, {
+            fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}`, {
                 method: 'POST',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
                 mode: 'cors',
@@ -50,7 +50,7 @@ class Create extends Component{
             .catch((err) => { console.log("Error: " + err) });
         }
         else{
-            fetch(process.env.REACT_APP_APIHOST + process.env.REACT_APP_APIROUTE + updated._id, {
+            fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}/${updated._id}`, {
                 method: 'PUT',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
                 mode: 'cors',

@@ -1,7 +1,7 @@
 var uuidv4 = require('uuid/v4');
 
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DB}`, {useNewUrlParser: true});
+mongoose.connect(`mongodb://${process.env.MONGODB_SERVICE_HOST}:${process.env.MONGODB_SERVICE_PORT}/${process.env.DB_NAME}`, {useNewUrlParser: true});
 
 const Schema = mongoose.Schema;
 const Character = new Schema({
