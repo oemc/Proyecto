@@ -14,7 +14,6 @@ class Create extends Component{
             hairColor: "",
             alias: ""
         };
-        console.log(props.character);
         this.state = {
             "done": false,
             "character": preState
@@ -45,7 +44,8 @@ class Create extends Component{
             })
             .then((response) => { 
                 if(response.status === 201){ this.setState({"done": true}); }
-                else{ window.alert('An error has ocurrred');} 
+                else if(response.status === 400){ window.alert('Se debe llenar todos los campos'); }
+                else{ window.alert('Ha ocurrido un error');} 
             })
             .catch((err) => { console.log("Error: " + err) });
         }
@@ -57,7 +57,9 @@ class Create extends Component{
                 body: JSON.stringify(updated)})
             .then((response) => { 
                 if(response.status === 204){ this.setState({"done": true}); }
-                else{ window.alert('An error has ocurrred');} 
+                else if(response.status === 400){ window.alert('Se debe llenar todos los campos'); }
+                else if(response.status === 404){ window.alert('El elemento buscado no existe'); }
+                else{ window.alert('Ha ocurrido un error');} 
             })
             .catch((err) => { console.log("Error: " + err) });
         }

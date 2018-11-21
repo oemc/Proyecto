@@ -1,0 +1,7 @@
+{
+    "Server":{
+        "HOST":"35.238.19.49",
+        "PORT":3001,
+        "ROUTE":"api/v1/waifu"
+    }
+}

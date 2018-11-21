@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: react-app-server
+  name: server
 spec:
   selector:
     matchLabels:
@@ -20,21 +20,11 @@ spec:
       - args:
         - npm
         - start
-        image: us.gcr.io/waifuwebapp/server
+        image: us.gcr.io/waifuwebapp/server:latest
         env:
-        - name: MONGODB_SERVICE_HOST
-          value: "10.47.252.214"
-        - name: MONGODB_SERVICE_PORT
-          value: "27017"
-        - name: REDIS_SERVICE_HOST
-          value: "10.47.242.109"
-        - name: REDIS_SERVICE_PORT
-          value: "6379"
-        - name: DB_NAME
-          value: "chardb"
-        - name: API_PORT
-          value: "3001"
-        name: react-app-server
+            - name: NODE_ENV
+              value: 'production'
+        name: server
         ports:
         - containerPort: 3001
-      hostname: react-app-server
+      hostname: server

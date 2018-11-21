@@ -22,13 +22,6 @@ spec:
         - -g
         - daemon off;
         image: us.gcr.io/waifuwebapp/client
-        env:
-        - name: REACT_APP_SERVER_SERVICE_HOST
-          value: "10.47.251.22"
-        - name: REACT_APP_SERVER_SERVICE_PORT
-          value: "3001"
-        - name: REACT_APP_SERVER_ROUTE
-          value: "api/v1/waifu"
         name: client
         ports:
         - containerPort: 80

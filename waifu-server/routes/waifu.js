@@ -3,7 +3,8 @@ var router = express.Router();
 var createError = require('http-errors');
 let storage = require('./storage.js');
 let cache = require('./cache.js');
-
+let props = ['pic', 'name', 'origin', 'occupation', 'hairColor', 'alias'];
+    
 /* GET waifu listing. */
 router.get('/', function(req, res, next) {
     cache.get('*', (err, reply) => {
@@ -16,7 +17,7 @@ router.get('/', function(req, res, next) {
                     next(createError(500));
                 }
                 res.status(200).json(docs);
-                cache.append('*', docs, 60);
+                cache.append('*', docs, 20);
             });
         }
         else{
@@ -41,7 +42,7 @@ router.get('/:id', function(req, res, next) {
                 }
                 else{
                     res.status(200).json(docs);
-                    cache.append(req.params.id, docs, 120);
+                    cache.append(req.params.id, docs, 60);
                 }
             });
         }
@@ -53,29 +54,39 @@ router.get('/:id', function(req, res, next) {
 
 /* POST waifu inserting. */
 router.post('/', function(req, res, next) {
-    storage.create(req.body, (err, docs) => {
-        if(err){
-            next(createError(500));
-        }
-        res.status(201).json({ id: docs._id });
-    });
+    if(!props.every(prop => (req.body[prop] != ''))){
+        next(createError(400));
+    }
+    else{
+        storage.create(req.body, (err, docs) => {
+            if(err){
+                next(createError(500));
+            }
+            res.status(201).json({ id: docs._id });
+        });
+    }
 });
 
 /* PUT waifu updating. */
 router.put('/:id', function(req, res, next) {
-    storage.update(req.params.id, req.body, (err, docs) => {
-        if(err){
-            next(createError(500));
-        }
-        else if(docs.n == 0){
-            console.log(docs);
-            next(createError(404));
-        }
-        else{
-            console.log(docs);
-            res.status(204).send();
-        }
-    });
+    if(!props.every(prop => (req.body[prop] != ''))){
+        next(createError(400));
+    }
+    else{
+        storage.update(req.params.id, req.body, (err, docs) => {
+            if(err){
+                next(createError(500));
+            }
+            else if(docs.n == 0){
+                console.log(docs);
+                next(createError(404));
+            }
+            else{
+                console.log(docs);
+                res.status(204).send();
+            }
+        });
+    }
 });
 
 /* DELETE waifu deleting. */

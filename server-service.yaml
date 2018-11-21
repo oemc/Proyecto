@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-app-server
+  name: server
 spec:
   selector:
     app: waifu-app
@@ -10,4 +10,4 @@ spec:
   - protocol: TCP
     port: 3001
     targetPort: 3001
-
+  type: LoadBalancer

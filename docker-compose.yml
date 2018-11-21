@@ -23,28 +23,25 @@ services:
     hostname: waifu-server
     expose:
       - 3001
-    environment:
-      DB_HOST: mongodb
-      API_PORT: 3001
-      REDIS_HOST: redis
     ports:
       - 3001:3001
     links:
       - mongodb
       - redis
-    command: npm start
+    command: >
+      sh -c "export NODE_ENV=docker &&
+             npm start"
 
 # Setup client container
   client:
     build: ./waifu-app
     hostname: waifu-app
-    environment:
-      - REACT_APP_API_HOST=http://waifu-server:3001/
-      - REACT_APP_PORT=80
     expose:
       - 80
     ports:
       - 8000:80
     links:
       - server
-    command: [nginx, '-g', 'daemon off;']
+    command: >
+      sh -c "export NODE_ENV=docker &&
+             nginx -g daemon off;"

@@ -33,7 +33,7 @@ class Home extends Component {
         mode: 'cors'})
       .then((response) => { 
         if(response.status === 204){ this.getList(); }
-        else{ window.alert('An error has ocurrred');} 
+        else{ window.alert('Ha ocurrido un error');} 
       })
       .catch((err) => { console.log("Error: " + err) });
     }
