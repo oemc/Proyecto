@@ -10,32 +10,30 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      "localList": [] 
-    }
-    this.getList();
+      "localList": this.getList() 
+    };
   }
 
   getList(){
-    fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}`, {
-      method: 'GET', 
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
-      mode: 'cors'})
-      .then((response) => { return response.json(); } )
-      .then((json) => { this.setState({ "localList": json }) })
-      .catch((err) => { console.log("Error: " + err) });
+    let foundList = [];
+    let foundId = JSON.parse(localStorage.getItem("allId"));
+    if (foundId !== null){
+      foundId.forEach((Id) => {
+        foundList.push(JSON.parse(localStorage.getItem(Id)));
+      });
+    }
+    else{ localStorage.setItem("allId", "[]") }
+    return(foundList);
   }
 
   deletePrompt(id, name){
     if (window.confirm('Are you sure you wish to delete ' + name)){
-      fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}/${id}`, {
-        method: 'DELETE', 
-        headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
-        mode: 'cors'})
-      .then((response) => { 
-        if(response.status === 204){ this.getList(); }
-        else{ window.alert('Ha ocurrido un error');} 
-      })
-      .catch((err) => { console.log("Error: " + err) });
+      let foundId = JSON.parse(localStorage.getItem("allId"));
+      let index = foundId.indexOf(id);
+      foundId.splice(index, 1);
+      localStorage.setItem("allId", JSON.stringify(foundId));
+      localStorage.removeItem(id);
+      this.setState({"localList": this.getList()});
     }
   }
 
@@ -46,10 +44,10 @@ class Home extends Component {
     return(
       this.state.localList.map((character) => {
         return(
-          <div className="WaifuTile" key={character._id}>
+          <div className="WaifuTile" key={character.id}>
             <div className="Controls">
-              <NavLink to= {"/Update/" + character._id}><img className="Icon" src={Edit} alt="edit"/></NavLink>
-              <a href="#"><img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character._id, character.name)}/></a>
+              <NavLink to= {"/Update/" + character.id}><img className="Icon" src={Edit} alt="edit"/></NavLink>
+              <a href="#"><img className="Icon" src={Delete} alt="delete" onClick={() => this.deletePrompt(character.id, character.name)}/></a>
             </div>
             <Waifu character={character}/>
           </div>

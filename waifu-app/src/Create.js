@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import uuidv4 from 'uuid/v4';
 import './Create.css'
 import FileBase64 from 'react-file-base64';
 import {Redirect} from 'react-router-dom';
@@ -35,34 +36,14 @@ class Create extends Component{
 
     submit(){
         let updated = Object.assign({}, this.state.character);
-        if(updated._id == null){
-            fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}`, {
-                method: 'POST',
-                headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
-                mode: 'cors',
-                body: JSON.stringify(updated)
-            })
-            .then((response) => { 
-                if(response.status === 201){ this.setState({"done": true}); }
-                else if(response.status === 400){ window.alert('Se debe llenar todos los campos'); }
-                else{ window.alert('Ha ocurrido un error');} 
-            })
-            .catch((err) => { console.log("Error: " + err) });
+        if(updated.id == null){
+            updated.id = uuidv4();
+            let foundId = JSON.parse(localStorage.getItem("allId"));
+            foundId.push(updated.id);
+            localStorage.setItem("allId",JSON.stringify(foundId));
         }
-        else{
-            fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}/${updated._id}`, {
-                method: 'PUT',
-                headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
-                mode: 'cors',
-                body: JSON.stringify(updated)})
-            .then((response) => { 
-                if(response.status === 204){ this.setState({"done": true}); }
-                else if(response.status === 400){ window.alert('Se debe llenar todos los campos'); }
-                else if(response.status === 404){ window.alert('El elemento buscado no existe'); }
-                else{ window.alert('Ha ocurrido un error');} 
-            })
-            .catch((err) => { console.log("Error: " + err) });
-        }
+        localStorage.setItem(updated.id, JSON.stringify(updated));
+        this.setState({"done": true});
     }
 
     render(){

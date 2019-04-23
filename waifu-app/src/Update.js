@@ -8,27 +8,14 @@ const Update = ({match}) => (<UpdatePage _id={match.params._id}/>);
 class UpdatePage extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            character: {},
-            ready: false,
-            redirect: false
-        };
-        this.getCharacter(props._id);
+        this.state = this.getCharacter(props._id);
     }
 
     getCharacter(_id){
-        fetch(`http://${process.env.REACT_APP_SERVER_SERVICE_HOST}:${process.env.REACT_APP_SERVER_SERVICE_PORT}/${process.env.REACT_APP_SERVER_ROUTE}/${_id}`, {
-          method: 'GET', 
-          headers: {'Accept': 'application/json', 'Content-Type': 'application/json' }, 
-          mode: 'cors'})
-          .then((response) => { 
-            if(response.status === 404){ this.setState({ "redirect": true }); }
-            return response.json(); 
-          })
-          .then((json) => { 
-            if(!this.state.redirect){ this.setState({ character: json, ready: true }); } 
-          })
-          .catch((err) => { console.log("Error: " + err) });
+        console.log(_id);
+        let character = JSON.parse(localStorage.getItem(_id));
+        if(character == null){ return({ "redirect": true }); }
+        else { return({ character: character, ready: true }); }
     }
 
     render(){
