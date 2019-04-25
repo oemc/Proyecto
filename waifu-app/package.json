@@ -2,6 +2,7 @@
   "name": "waifu-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://oemc.github.io/proyecto",
   "dependencies": {
     "merge": "^1.2.1",
     "react": "^16.5.0",
@@ -15,12 +16,17 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
 }
