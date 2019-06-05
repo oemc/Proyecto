@@ -14,13 +14,13 @@ Demo disponible [aqui](https://oemc.github.io/Proyecto/)
 *Para demostrar la funcionalidad esperada de todo el sistema unicamente en la aplicacion web se consulta al almacenamiento local
 en vez de realizar una solicitud HTTP.
 
-###/waifu-app/
+#### /waifu-app/
 ```javascript
 npm install
 npm start
 ```
 
-###/waifu-server/
+#### /waifu-server/
 ```javascript
 npm install
 npm start
