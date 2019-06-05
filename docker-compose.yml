@@ -1,0 +1,47 @@
+version: '3'
+services:
+
+
+# Setup mongodb container
+  mongodb:
+    image: mongo:latest
+    hostname: mongodb
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    command: mongod --port 27017
+
+# Setup redis container
+  redis:
+    image: redis:latest
+    hostname: redis
+    command: redis-server
+
+# Setup node container
+  server:
+    build: ./waifu-server
+    hostname: waifu-server
+    expose:
+      - 3001
+    ports:
+      - 3001:3001
+    links:
+      - mongodb
+      - redis
+    command: >
+      sh -c "export NODE_ENV=docker &&
+             npm start"
+
+# Setup client container
+  client:
+    build: ./waifu-app
+    hostname: waifu-app
+    expose:
+      - 80
+    ports:
+      - 8000:80
+    links:
+      - server
+    command: >
+      sh -c "export NODE_ENV=docker &&
+             nginx -g daemon off;"
